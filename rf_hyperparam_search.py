@@ -1,17 +1,17 @@
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-import numpy as np
 from pprint import pprint
-from sklearn.ensemble import RandomForestClassifier
 
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import RandomizedSearchCV
+
+from load_dataset import load_vfh_data
 
 # Number of trees in random forest
-from load_dataset import load_simple_vfh_dataset, load_vfh_data
-
-n_estimators = [int(x) for x in np.linspace(start=100, stop=400, num=4)]
+n_estimators = [int(x) for x in np.linspace(start=100, stop=1000, num=8)]
 # Number of features to consider at every split
 max_features = ['auto', 'sqrt']
 # Maximum number of levels in tree
-max_depth = [int(x) for x in np.linspace(10, 50, num=4)]
+max_depth = [int(x) for x in np.linspace(10, 50, num=5)]
 max_depth.append(None)
 # Minimum number of samples required to split a node
 min_samples_split = [2, 5, 10]
@@ -33,8 +33,8 @@ pprint(grid)
 rf = RandomForestClassifier()
 
 data, labels, cv_generator = load_vfh_data()
-rf_random_search = RandomizedSearchCV(estimator=rf, param_distributions=grid, n_iter=10, cv=cv_generator, verbose=2,
-                                      random_state=42, n_jobs=1)
+rf_random_search = RandomizedSearchCV(estimator=rf, param_distributions=grid, n_iter=200, cv=cv_generator, verbose=2,
+                                      random_state=42, n_jobs=12)
 # rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=6)
 
 rf_random_search.fit(data, labels)
