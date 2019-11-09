@@ -3,7 +3,7 @@ from sklearn.model_selection import ShuffleSplit
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 
-from load_dataset import load_old_dataset, load_simple_vfh_dataset
+from load_dataset import load_simple_vfh_dataset
 
 # Load the data
 x_train, y_train, x_test, y_test = load_simple_vfh_dataset()

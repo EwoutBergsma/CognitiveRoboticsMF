@@ -1,22 +1,6 @@
-from utils import old_cats, cats
+from utils import cats
 from os.path import join
 import numpy as np
-
-
-def load_old_dataset(folder_path=None, amount_of_classes=51, items_per_class=1000, verbose=False):
-    folder_path = folder_path or "./old_new_dataset"
-    X = ()
-    Y = ()
-    for label, cat in enumerate(old_cats[:amount_of_classes]):
-        category_data = np.load(join(folder_path, "{}.npy".format(cat)))[:items_per_class]
-        if verbose:
-            print("Loaded category {} with size:{}{}".format(cat, "\t"*(4 - (len(cat) + 3) // 4), category_data.shape))
-        Y += ([label] * category_data.shape[0],)
-        X += (category_data,)
-    data, labels = np.concatenate(X), np.concatenate(Y)
-    if verbose:
-        print("Size of total data:\t\t\t\t{}".format(data.shape))
-    return data, labels
 
 
 def load_simple_vfh_dataset(folder_path=None):
