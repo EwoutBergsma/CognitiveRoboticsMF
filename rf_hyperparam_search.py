@@ -1,11 +1,11 @@
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
 from pprint import pprint
 from sklearn.ensemble import RandomForestClassifier
 
 
 # Number of trees in random forest
-from load_dataset import load_simple_vfh_dataset
+from load_dataset import load_simple_vfh_dataset, load_vfh_data
 
 n_estimators = [int(x) for x in np.linspace(start=100, stop=400, num=4)]
 # Number of features to consider at every split
@@ -21,19 +21,24 @@ min_samples_leaf = [1, 2, 4]
 bootstrap = [True, False]
 
 # Create the random grid
-grid = {'n_estimators': [100], #n_estimators,
+grid = {'n_estimators': n_estimators,
         'max_features': max_features,
-        # 'max_depth': max_depth,
-        # 'min_samples_split': min_samples_split,
-        # 'min_samples_leaf': min_samples_leaf,
+        'max_depth': max_depth,
+        'min_samples_split': min_samples_split,
+        'min_samples_leaf': min_samples_leaf,
         'bootstrap': bootstrap}
 
 pprint(grid)
 
 rf = RandomForestClassifier()
 
-rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=1)
+data, labels, cv_generator = load_vfh_data()
+rf_random_search = RandomizedSearchCV(estimator=rf, param_distributions=grid, n_iter=10, cv=cv_generator, verbose=2,
+                                      random_state=42, n_jobs=1)
+# rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=6)
 
-x_train, y_train, x_test, y_test = load_simple_vfh_dataset()
-rf_grid_search.fit(x_train, y_train)
-sorted(rf_grid_search.cv_results_.keys())
+rf_random_search.fit(data, labels)
+print(rf_random_search.cv_results_)
+print(rf_random_search.best_params_)
+print(rf_random_search.best_score_)
+print(rf_random_search.cv_results_['mean_test_score'])
