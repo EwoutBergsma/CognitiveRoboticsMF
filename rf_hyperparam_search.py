@@ -7,7 +7,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from load_dataset import load_vfh_data
 
 # Number of trees in random forest
-n_estimators = [int(x) for x in np.linspace(start=100, stop=1000, num=8)]
+n_estimators = [int(x) for x in np.linspace(start=100, stop=400, num=4)]
 # Number of features to consider at every split
 max_features = ['auto', 'sqrt']
 # Maximum number of levels in tree
@@ -34,7 +34,7 @@ rf = RandomForestClassifier()
 
 data, labels, cv_generator = load_vfh_data()
 rf_random_search = RandomizedSearchCV(estimator=rf, param_distributions=grid, n_iter=100, cv=cv_generator, verbose=2,
-                                      random_state=42, n_jobs=6)
+                                      random_state=42, n_jobs=20)
 # rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=6)
 
 rf_random_search.fit(data, labels)
