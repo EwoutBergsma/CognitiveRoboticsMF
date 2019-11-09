@@ -30,10 +30,7 @@ grid = {'n_estimators': [100], #n_estimators,
 
 pprint(grid)
 
-
 rf = RandomForestClassifier()
-
-
 
 rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=1)
 
