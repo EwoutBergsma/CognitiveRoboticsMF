@@ -34,7 +34,7 @@ rf = RandomForestClassifier()
 
 data, labels, cv_generator = load_vfh_data()
 rf_random_search = RandomizedSearchCV(estimator=rf, param_distributions=grid, n_iter=100, cv=cv_generator, verbose=2,
-                                      random_state=42, n_jobs=20)
+                                      random_state=42, n_jobs=4)
 # rf_grid_search = GridSearchCV(estimator=rf, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=6)
 
 rf_random_search.fit(data, labels)
