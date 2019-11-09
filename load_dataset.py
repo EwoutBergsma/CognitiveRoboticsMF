@@ -4,6 +4,10 @@ import numpy as np
 
 
 def load_simple_vfh_dataset(folder_path=None):
+    """
+    :param folder_path: The path to the folder with .npy files
+    :return: x_train, y_train, x_test, y_test
+    """
     folder_path = folder_path or "./new_dataset"
     X_train = ()
     Y_train = []
