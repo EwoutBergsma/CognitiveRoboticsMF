@@ -16,6 +16,12 @@ OUTPUT_DATASET_PATH = "/home/gitaar9/AI/COR/CPP_try/new_dataset"
 
 
 def read_object(category_name, object_name):
+    """
+    :param category_name: The name of the category which is also the directory name e.g. apple, water_bottle
+    :param object_name: The name of the object which is also a directory name e.g. apple_1, apple_2, apple_3
+    :return: An np array with images of shape (n, 224, 224, 3) and an np array with vfh representations of shape
+    (n, 308) where n is the amount of images taken of the instance with the name object name
+    """
     object_path = join(EVAL_DATASET_PATH, category_name, object_name)
     # Get the filenames from the txt files
     filenames = [f[:-8] for f in listdir(object_path)
@@ -41,6 +47,12 @@ def read_object(category_name, object_name):
 
 
 def read_category(category_name):
+    """
+    :param category_name: The name of the category which is also the directory name e.g. apple, water_bottle
+    :return: the function return a np array with images with form (n, 224, 224, 3), np array with vhf representation
+    with shape (n, 308) and np array with instances names like ['apple_1', 'apple_1', ..., 'apple_5] with shape (n,)
+    in which n is the amount of pictures taken of apples
+    """
     category_path = join(EVAL_DATASET_PATH, category_name)
     objects_names = [d for d in listdir(category_path) if isdir(join(category_path, d))]
     print("Found {} instances of {}".format(len(objects_names), category_name))
@@ -72,8 +84,8 @@ if __name__ == "__main__":
         except FileNotFoundError:
             pass
 
-        print("Creating npy files for {}".format(category_name))
         # Load the data in np arrays files
+        print("Creating npy files for {}".format(category_name))
         category_image_data, category_vhf_data, category_name_data = read_category(category_name)
         print("Total sizes for ", category_name, ": ", category_image_data.shape, category_vhf_data.shape,
               category_name_data.shape)

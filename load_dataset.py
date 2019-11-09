@@ -4,6 +4,10 @@ import numpy as np
 
 
 def custom_washington_dataset_cv_10fold(names):
+    """
+    :param names: An np array with the names of all the idxs
+    :return: A generator that will give the idxs of the test/train data for 10 folds
+    """
     # test_instance_for_all_folds are the instances that should be in the test set for every fold, as specified by the
     # authors of the Washington rgb-d dataset
     test_instances_for_all_folds = [
