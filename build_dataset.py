@@ -8,9 +8,9 @@ from skimage.transform import resize
 from run_exec import get_vhf_representation
 from utils import cats
 
-EVAL_DATASET_PATH = "/home/gitaar9/AI/COR/CPP_try/raw_datasets/rgbd-dataset_eval"
+EVAL_DATASET_PATH = "/home/gitaar9/AI/COR/CognitiveRoboticsMF/raw_datasets/rgbd-dataset_eval"
 PC_DATASET_PATH = "/home/gitaar9/Downloads/finished_tars_rgbd/rgbd-dataset"
-OUTPUT_DATASET_PATH = "/home/gitaar9/AI/COR/CPP_try/new_dataset"
+OUTPUT_DATASET_PATH = "/home/gitaar9/AI/COR/CognitiveRoboticsMF/new_dataset"
 
 
 def read_object(category_name, object_name):

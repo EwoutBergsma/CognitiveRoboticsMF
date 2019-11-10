@@ -6,7 +6,7 @@ from sklearn.model_selection import GridSearchCV
 from load_dataset import load_vfh_data
 
 # Number of trees in random forest
-n_estimators = [20]
+n_estimators = [22]
 # Maximum number of levels in tree
 max_depth = [None]  # int(x) for x in np.linspace(10, 50, num=5)]
 # Minimum number of samples required to split a node
@@ -39,7 +39,7 @@ rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbos
 rf_grid_search.fit(data, labels)
 
 # Print the params with the best result
-hashtags = "\n" + "#"*50 + "\n"
+hashtags = "\n" + "#"*100 + "\n"
 print(
         "{}\nBest score: {}\nParameters used for that score: {}\nOther scores: {}\n{}".format(
                 hashtags,

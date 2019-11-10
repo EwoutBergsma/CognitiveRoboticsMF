@@ -6,7 +6,7 @@ from sklearn.model_selection import GridSearchCV
 from load_dataset import load_vfh_and_all_image_feature_data
 
 # Number of trees in random forest
-n_estimators = [20]
+n_estimators = [18]
 # Maximum number of levels in tree
 max_depth = [None]  # int(x) for x in np.linspace(10, 50, num=5)]
 # Minimum number of samples required to split a node
@@ -33,13 +33,13 @@ mondrian_forest = MondrianForestClassifier()
 # rf_random_search = RandomizedSearchCV(estimator=mondrian_forest, param_distributions=grid, n_iter=100,
 #                                       cv=cv_generator, verbose=2, n_jobs=20)
 
-rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=4)
+rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=3)
 
 # Run the random hyperparameter search
 rf_grid_search.fit(data, labels)
 
 # Print the params with the best result
-hashtags = "\n" + "#"*50 + "\n"
+hashtags = "\n" + "#"*100 + "\n"
 print(
         "{}\nBest score: {}\nParameters used for that score: {}\nOther scores: {}\n{}".format(
                 hashtags,
