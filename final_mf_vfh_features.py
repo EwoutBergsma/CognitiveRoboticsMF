@@ -33,14 +33,19 @@ mondrian_forest = MondrianForestClassifier()
 # rf_random_search = RandomizedSearchCV(estimator=mondrian_forest, param_distributions=grid, n_iter=100,
 #                                       cv=cv_generator, verbose=2, n_jobs=20)
 
-rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=20)
+rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=10)
 
 # Run the random hyperparameter search
 rf_grid_search.fit(data, labels)
 
-# Print all scores for the different setups tried
-print(rf_grid_search.cv_results_['mean_test_score'])
 # Print the params with the best result
-print(rf_grid_search.best_params_)
-# Print the best result
-print(rf_grid_search.best_score_)
+hashtags = "\n" + "#"*50 + "\n"
+print(
+        "{}\nBest score: {}\nParameters used for that score: {}\nOther scores: {}\n{}".format(
+                hashtags,
+                rf_grid_search.best_score_,
+                rf_grid_search.best_params_,
+                rf_grid_search.cv_results_['mean_test_score'],
+                hashtags
+        )
+)
