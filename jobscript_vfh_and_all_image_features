@@ -3,7 +3,6 @@
 #SBATCH --time=23:55:00
 #SBATCH --partition=regular
 #SBATCH --mem=120GB
-#SBATCH --cpus-per-task=2
 
 ml Python/3.6.4-foss-2018a
 

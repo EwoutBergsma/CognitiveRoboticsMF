@@ -1,51 +1,17 @@
-from pprint import pprint
-
 from skgarden import MondrianForestClassifier
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import cross_val_score
 
 from load_dataset import load_vfh_and_all_image_feature_data
 
-# Number of trees in random forest
-n_estimators = [18]
-# Maximum number of levels in tree
-max_depth = [None]  # int(x) for x in np.linspace(10, 50, num=5)]
-# Minimum number of samples required to split a node
-min_samples_split = [2]
-# Method of selecting samples for training each tree
-bootstrap = [False]
-
-# Create the random grid
-grid = {'n_estimators': n_estimators,
-        'max_depth': max_depth,
-        'min_samples_split': min_samples_split,
-        'bootstrap': bootstrap}
-
-pprint(grid)
-
-# Load the data, labels and cv idxs generator
+# Load_vfh_data return the data, labels(targets) and a generator that can be used to fit with 10-fold cross-validation
 data, labels, cv_generator = load_vfh_and_all_image_feature_data()
+print(data.shape, labels.shape)
 
-# Initialize a classifier
-mondrian_forest = MondrianForestClassifier()
-
-# The RandomizedSearchCV will try out n_iter random combinations of the supplied grid, n_jobs specifies the amount of
-# workers used, don't run 20 workers on a your laptop since this requires tons of RAM.
-# rf_random_search = RandomizedSearchCV(estimator=mondrian_forest, param_distributions=grid, n_iter=100,
-#                                       cv=cv_generator, verbose=2, n_jobs=20)
-
-rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=2)
-
-# Run the random hyperparameter search
-rf_grid_search.fit(data, labels)
-
-# Print the params with the best result
-hashtags = "\n" + "#"*100 + "\n"
-print(
-        "{}\nBest score: {}\nParameters used for that score: {}\nOther scores: {}\n{}".format(
-                hashtags,
-                rf_grid_search.best_score_,
-                rf_grid_search.best_params_,
-                rf_grid_search.cv_results_['mean_test_score'],
-                hashtags
-        )
-)
+# Create model
+model = MondrianForestClassifier(n_estimators=18, max_depth=None, min_samples_split=2, bootstrap=False)
+# Get the scores
+scores = cross_val_score(model, data, labels, cv=cv_generator)
+# Print the scores, this will show 10 accuracies when using 10-fold cross-validation
+print(scores)
+# Print the averaged scores
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
