@@ -8,8 +8,6 @@ from skimage.transform import resize
 from run_exec import get_vhf_representation
 from utils import cats
 
-
-# from matplotlib import pyplot as plt
 EVAL_DATASET_PATH = "/home/gitaar9/AI/COR/CPP_try/raw_datasets/rgbd-dataset_eval"
 PC_DATASET_PATH = "/home/gitaar9/Downloads/finished_tars_rgbd/rgbd-dataset"
 OUTPUT_DATASET_PATH = "/home/gitaar9/AI/COR/CPP_try/new_dataset"
@@ -74,8 +72,7 @@ def read_category(category_name):
 # execute only if run as a script
 if __name__ == "__main__":
 
-    category_names = [category_name for category_name in cats]
-    for category_name in category_names:
+    for category_name in cats:
         # Check if file already exist
         try:
             np.load(join(OUTPUT_DATASET_PATH, "{}_instance_names.npy".format(category_name)))
@@ -84,7 +81,7 @@ if __name__ == "__main__":
         except FileNotFoundError:
             pass
 
-        # Load the data in np arrays files
+        # Load the data(.pcd and .png) to np arrays
         print("Creating npy files for {}".format(category_name))
         category_image_data, category_vhf_data, category_name_data = read_category(category_name)
         print("Total sizes for ", category_name, ": ", category_image_data.shape, category_vhf_data.shape,

@@ -1,3 +1,4 @@
+# All 51 categories used in the Washington RGB-D dataset
 cats = ["apple", "cell_phone", "hand_towel", "notebook", "scissors", "food_bag", "cereal_box", "instant_noodles",
         "onion", "shampoo", "banana", "coffee_mug", "food_jar", "orange", "soda_can", "bell_pepper", "comb",
         "keyboard", "peach", "sponge", "bowl", "food_cup", "kleenex", "pear", "stapler", "food_box", "dry_battery",

@@ -11,5 +11,7 @@ print(data.shape, labels.shape)
 model = MondrianForestClassifier(n_estimators=20)
 # Get the scores
 scores = cross_val_score(model, data, labels, cv=cv_generator)
+# Print the scores, this will show 10 accuracies when using 10-fold cross-validation
 print(scores)
+# Print the averaged scores
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
