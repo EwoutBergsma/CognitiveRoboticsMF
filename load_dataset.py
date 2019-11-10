@@ -78,4 +78,3 @@ def load_simple_vfh_dataset(folder_path=None):
         Y_test.extend([label] * test_vfh_reps.shape[0])
 
     return np.concatenate(X_train), np.array(Y_train), np.concatenate(X_test), np.array(Y_test)
-
