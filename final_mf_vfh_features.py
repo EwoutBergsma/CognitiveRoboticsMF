@@ -33,7 +33,7 @@ mondrian_forest = MondrianForestClassifier()
 # rf_random_search = RandomizedSearchCV(estimator=mondrian_forest, param_distributions=grid, n_iter=100,
 #                                       cv=cv_generator, verbose=2, n_jobs=20)
 
-rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=4)
+rf_grid_search = GridSearchCV(estimator=mondrian_forest, param_grid=grid, verbose=2, cv=cv_generator, n_jobs=3)
 
 # Run the random hyperparameter search
 rf_grid_search.fit(data, labels)
