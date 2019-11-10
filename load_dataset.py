@@ -50,6 +50,41 @@ def load_vfh_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
+def load_vfh_and_all_image_feature_data(folder_path=None):
+    folder_path = folder_path or "./new_dataset"
+    X = ()
+    Y = []
+    all_names = ()
+
+    for label, cat in enumerate(cats):
+        vfh_reps = np.load(join(folder_path, "{}_vfh_reps.npy".format(cat)))
+        image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
+        instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
+
+        X += (np.concatenate((vfh_reps, image_features), axis=1),)
+        Y.extend([label] * vfh_reps.shape[0])
+        all_names += (instance_names,)
+
+    return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
+
+
+def load_all_image_feature_data(folder_path=None):
+    folder_path = folder_path or "./new_dataset"
+    X = ()
+    Y = []
+    all_names = ()
+
+    for label, cat in enumerate(cats):
+        image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
+        instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
+
+        X += (image_features,)
+        Y.extend([label] * image_features.shape[0])
+        all_names += (instance_names,)
+
+    return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
+
+
 def load_simple_vfh_dataset(folder_path=None):
     """
     :param folder_path: The path to the folder with .npy files
