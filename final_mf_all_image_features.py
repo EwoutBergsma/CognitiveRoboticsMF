@@ -7,6 +7,6 @@ data, labels, cv_generator = load_all_image_feature_data()
 mf_params = {
     'n_estimators': 20,
     'max_depth': 100,
-    'min_sample_split': 2
+    'min_samples_split': 2
 }
 cross_validate_mondrian_forest(data, labels, cv_generator, **mf_params)
