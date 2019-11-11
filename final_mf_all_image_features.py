@@ -5,7 +5,7 @@ from load_dataset import load_all_image_feature_data
 data, labels, cv_generator = load_all_image_feature_data()
 
 mf_params = {
-    'n_estimatores': 20,
+    'n_estimators': 20,
     'max_depth': 100,
     'min_sample_split': 2
 }
