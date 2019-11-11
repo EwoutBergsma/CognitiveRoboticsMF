@@ -1,17 +1,12 @@
-from skgarden import MondrianForestClassifier
-from sklearn.model_selection import cross_val_score
-
+from final_general_functions import cross_validate_mondrian_forest
 from load_dataset import load_all_image_feature_data
 
 # Load_vfh_data return the data, labels(targets) and a generator that can be used to fit with 10-fold cross-validation
 data, labels, cv_generator = load_all_image_feature_data()
-print(data.shape, labels.shape)
 
-# Create model
-model = MondrianForestClassifier(n_estimators=20, max_depth=None, min_samples_split=5, bootstrap=False)
-# Get the scores
-scores = cross_val_score(model, data, labels, cv=cv_generator, verbose=2)
-# Print the scores, this will show 10 accuracies when using 10-fold cross-validation
-print(scores)
-# Print the averaged scores
-print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+mf_params = {
+    'n_estimatores': 20,
+    'max_depth': 100,
+    'min_sample_split': 2
+}
+cross_validate_mondrian_forest(data, labels, cv_generator, **mf_params)
