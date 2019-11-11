@@ -8,9 +8,9 @@ data, labels, cv_generator = load_all_image_feature_data()
 print(data.shape, labels.shape)
 
 # Create model
-model = MondrianForestClassifier(n_estimators=20, max_depth=None, min_samples_split=2, bootstrap=False)
+model = MondrianForestClassifier(n_estimators=20, max_depth=None, min_samples_split=5, bootstrap=False)
 # Get the scores
-scores = cross_val_score(model, data, labels, cv=cv_generator)
+scores = cross_val_score(model, data, labels, cv=cv_generator, verbose=2)
 # Print the scores, this will show 10 accuracies when using 10-fold cross-validation
 print(scores)
 # Print the averaged scores
