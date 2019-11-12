@@ -28,8 +28,12 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
         # Retrieve the yet unused data samples
         remaining_idxs = [idx for idx in range(X.shape[0]) if idx not in inital_idxs]
 
+        samples_used = inital_dataset_size
         # Loop over all unused data samples and learn from them when the confidence is to low
         for sample_data, sample_target in zip(X[remaining_idxs], Y[remaining_idxs]):
             probabilities = self.predict_proba([sample_data])
             if self.calculate_confidence(probabilities[0]) < threshold:
                 self.partial_fit([sample_data], [sample_target])
+                samples_used += 1
+
+        return samples_used
