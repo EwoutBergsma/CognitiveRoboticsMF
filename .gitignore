@@ -1,4 +1,5 @@
 .idea/
+venv/
 
 CPP/build/
 new_dataset/
