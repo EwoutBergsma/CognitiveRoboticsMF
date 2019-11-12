@@ -18,7 +18,7 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
         return X_train[rand_selected_rows, :], y_train[rand_selected_rows], rand_selected_rows
 
     def fit_using_al_strategy_thres(self, X, Y, classes=None, inital_dataset_size=300, threshold=0.5):
-        classes = classes or list(range(51))  # default classes are 0-50
+        classes = np.array(range(51)) if classes is None else classes  # default classes are 0-50
 
         # first, get the initial data set
         X_initial, Y_initial, inital_idxs = self.random_sampling(X, Y, inital_dataset_size)
