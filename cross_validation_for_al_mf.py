@@ -15,9 +15,10 @@ samples_used = []
 for training_idxs, validation_idxs in cv_generator:
     mf = MondrianForestClassifierWithALStrategy(n_estimators=22)
     samples_used.append(mf.fit_using_al_strategy_thres(data[training_idxs], labels[training_idxs], np.array(range(51)),
-                                                       300, 0.5))
+                                                       300, 0.3))
     scores.append(mf.score(np.array(data[validation_idxs, :]), np.array(labels[validation_idxs])))
     print(scores[-1], samples_used[-1])
+    del mf
 
 print('\n\n', scores)
 print(samples_used)
