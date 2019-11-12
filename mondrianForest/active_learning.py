@@ -50,6 +50,18 @@ def mondiran_forest(num_trees, X_train, y_train, X_test, y_test):
     return y_pred, mfc.score(X_test, y_test)
 
 
+def cross_validate_mondrian_forest(data, labels, cv_generator, **mf_params):
+    print("Data and labels shape: ", data.shape, labels.shape)
+    # Create model
+    model = MondrianForestClassifier(**mf_params)
+    # Get the scores
+    scores = cross_val_score(model, data, labels, cv=cv_generator, verbose=2)
+    # Print the scores, this will show 10 accuracies when using 10-fold cross-validation
+    print("All cv folds score: ", scores)
+    # Print the averaged scores
+    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+
 def active_learning_thres( X_train, y_train, X_test, y_test, ini_amount_depth_data_thres = ini_amount_depth_data_thres, num_trees=num_trees_depthdata, threshold=0.5):
     # first, get the initial data set
     sampled_X_train, sampled_y_train, init_training_data = random_sampling(X_train, y_train, ini_amount_depth_data_thres)
