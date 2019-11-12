@@ -11,10 +11,10 @@ x_train, y_train, x_test, y_test = load_simple_vfh_dataset()
 print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
 # # Create default Linear SVM
 # model = svm.SVC(kernel='linear')
-model = RandomForestClassifier(n_estimators=100)
-model.fit(x_train, y_train)
-score = model.score(x_test, y_test)
-print(score)
+# model = RandomForestClassifier(n_estimators=100)
+# model.fit(x_train, y_train)
+# score = model.score(x_test, y_test)
+# print(score)
 
 # # Define cross validation settings
 # cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0)
