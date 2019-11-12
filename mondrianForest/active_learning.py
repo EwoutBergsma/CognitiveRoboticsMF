@@ -1,5 +1,4 @@
 import numpy as np
-
 import random
 from skgarden import MondrianForestRegressor, MondrianForestClassifier
 from sklearn.datasets import load_iris
@@ -8,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import check_array
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from load_dataset import load_simple_vfh_dataset
+from sklearn.model_selection import cross_val_score
+
 
 """
     >> description of our dataset
@@ -32,12 +33,13 @@ def calculate_confidence(probabilities):
     :return confidence:
     """
     sorted_proba = sorted(probabilities, reverse=True)
-    # uncertainty h(p) = (second highest p) / (the highest p)
     return 1 - sorted_proba[1]/sorted_proba[0]
+
 
 def random_sampling(X_train, y_train, num_of_dataset):
     rand_selected_rows = np.random.choice(X_train.shape[0], num_of_dataset, replace=False)
     return X_train[rand_selected_rows, :], y_train[rand_selected_rows], rand_selected_rows
+
 
 
 def mondiran_forest(num_trees, X_train, y_train, X_test, y_test):
@@ -66,6 +68,8 @@ def active_learning_thres( X_train, y_train, X_test, y_test, ini_amount_depth_da
     remaining_X_data = X_train[rows_remaining_train_data, :]
     remaining_y_data = y_train[rows_remaining_train_data]
     selected_data = np.concatenate((remaining_X_data, remaining_y_data.reshape((-1, 1))), axis=1)
+    # TODO : is there any better way to do this? :(
+
     selected_X_data = []
     selected_y_data = []
     for instance in selected_data:
@@ -75,11 +79,18 @@ def active_learning_thres( X_train, y_train, X_test, y_test, ini_amount_depth_da
             selected_y_data.append(instance[-1])
     mfc.partial_fit(selected_X_data, selected_y_data)
     y_pred = mfc.predict(X_test)
-    # test!
     return mfc.score(X_test, y_test), len(selected_y_data)
 
 def active_learning_prec():
     pass
-# accuracy = active_learning_thres(ini_amount_depth_data_thres = 3000, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
-# print(accuracy)
 
+accuracy = active_learning_thres(ini_amount_depth_data_thres = 3000, X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test)
+print(accuracy)
+
+#
+# def mondiran_forest(num_trees, X_train, y_train, X_test, y_test):
+#     mfc = MondrianForestClassifier(n_estimators=num_trees)
+#     mfc.partial_fit(X_train, y_train)
+#     # y_mean = mfr.predict_proba([X_test[0]])
+#     # y_pred = mfr.predict(X_test)
+#     return y_pred, mfc.score(X_test, y_test)
