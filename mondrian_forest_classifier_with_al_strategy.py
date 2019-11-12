@@ -32,7 +32,6 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
         # Retrieve the probability distributions for the remaining training samples
         probabilities = self.predict_proba(X[inital_dataset_size:])
         # Filter the training samples based on the confidence of the mf
-        print(len(probabilities), len(list(range(inital_dataset_size, X.shape[0]))))
         selected_idxs = [idx for probs, idx in zip(probabilities, range(inital_dataset_size, X.shape[0])) if
                          self.calculate_confidence(probs) < threshold]
         # Fit again on the samples the mf is unsure about
