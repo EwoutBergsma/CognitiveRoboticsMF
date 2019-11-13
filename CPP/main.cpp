@@ -1,15 +1,37 @@
 #include <iostream>
+#include <sstream>
 
 #include <pcl/io/pcd_io.h> // Reading in point clouds
 #include <pcl/features/normal_3d.h> // Normal estimation
 #include <pcl/point_types.h> // Basic types PointXYZRGBA etc.
 #include <pcl/features/vfh.h> // VFH estimation
 
+#include "good.cpp"
+
 using namespace std;
 using namespace pcl;
 
 typedef pcl::PointXYZRGBA PointT;
 
+enum ShapeDescriptor { VFH, GOOD_5, GOOD_15 }; // VFH = 0, GOOD_5 = 1, GOOD_15 = 2
+
+int calculateGOODHistogram(boost::shared_ptr<PointCloud<PointT> > cloud, unsigned int number_of_bins, float threshold) {
+    // Setup the GOOD descriptor
+    GOODEstimation<PointT> GOOD_descriptor(number_of_bins, threshold);
+
+    // Provide the original point cloud
+    GOOD_descriptor.setInputCloud(cloud);
+
+    // Compute GOOD descriptor for the given pointcload
+    std::vector< float > object_description;
+    GOOD_descriptor.compute(object_description);
+
+    // Print it so it can be read as python array
+    cout << '[';
+    for (size_t i = 0; i < object_description.size() - 1; ++i)
+        std::cout << object_description.at(i) << ',';
+    std::cout << object_description.back() << "]" << std::endl;
+}
 
 int estimateViewpointFeatureHistogram(boost::shared_ptr<PointCloud<PointT> > cloud,  float normal_estimation_radius)
 {
@@ -34,7 +56,7 @@ int estimateViewpointFeatureHistogram(boost::shared_ptr<PointCloud<PointT> > clo
     size_t vfhs_size = sizeof(vfhs->points.at(0).histogram) / sizeof(float);
     // Push the representation to the object_representation container
     cout << '[';
-    for (size_t i = 0; i < vfhs_size ; i++)
+    for (size_t i = 0; i < vfhs_size ; ++i)
         cout << vfhs->points.at(0).histogram[i] << ((i == vfhs_size - 1) ? "" : ", ");
     cout << ']';
 }
@@ -42,9 +64,11 @@ int estimateViewpointFeatureHistogram(boost::shared_ptr<PointCloud<PointT> > clo
 int main (int argc, const char *argv[])
 {
     std::string pcd_file_address = argv[1];
-
-//    std::string pcd_file_address;
-//    pcd_file_address = "/home/gitaar9/AI/COR/CPP_try/datasets/pliers_Category/pliers_object_1.pcd";
+    unsigned int descriptor_type = 0;
+    if (argc > 2) {
+        istringstream convertStream(argv[2]);
+        convertStream >> descriptor_type;
+    }
 
     boost::shared_ptr<PointCloud<PointT>> target_pc (new PointCloud<PointT>);
 
@@ -55,7 +79,17 @@ int main (int argc, const char *argv[])
     }
 
     float normal_estimation_radius = 0.03; // used in VFH descriptor
-    estimateViewpointFeatureHistogram(target_pc, normal_estimation_radius);
+    switch (descriptor_type) {
+        case VFH:
+            estimateViewpointFeatureHistogram(target_pc, normal_estimation_radius);
+            break;
+        case GOOD_5:
+            calculateGOODHistogram(target_pc, 5, 0.0015);
+            break;
+        case GOOD_15:
+            calculateGOODHistogram(target_pc, 15, 0.0015);
+            break;
+    }
 
-    return (0);
+    return 0;
 }
