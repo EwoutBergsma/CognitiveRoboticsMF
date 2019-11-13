@@ -1,4 +1,4 @@
-from utils import cats
+from utils import cats, mRMR_selected_image_features
 from os.path import join
 import numpy as np
 
@@ -50,7 +50,7 @@ def load_vfh_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_vfh_and_all_image_feature_data(folder_path=None):
+def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=True):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
@@ -61,6 +61,9 @@ def load_vfh_and_all_image_feature_data(folder_path=None):
         image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
         instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
 
+        # When using mRMR choose 512 of the 4096 available image features
+        if use_mRMR:
+            image_features = image_features[mRMR_selected_image_features]
         X += (np.concatenate((vfh_reps, image_features), axis=1),)
         Y.extend([label] * vfh_reps.shape[0])
         all_names += (instance_names,)
@@ -68,7 +71,7 @@ def load_vfh_and_all_image_feature_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_all_image_feature_data(folder_path=None):
+def load_all_image_feature_data(folder_path=None, use_mRMR=True):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
@@ -78,6 +81,9 @@ def load_all_image_feature_data(folder_path=None):
         image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
         instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
 
+        # When using mRMR choose 512 of the 4096 available image features
+        if use_mRMR:
+            image_features = image_features[mRMR_selected_image_features]
         X += (image_features,)
         Y.extend([label] * image_features.shape[0])
         all_names += (instance_names,)

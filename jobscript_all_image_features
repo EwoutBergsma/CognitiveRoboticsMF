@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --time=23:55:00
-#SBATCH --partition=himem
-#SBATCH --mem=110GB
+#SBATCH --partition=regular
+#SBATCH --mem=60GB
 
 ml Python/3.6.4-foss-2018a
 
