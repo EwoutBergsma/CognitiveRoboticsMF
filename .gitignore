@@ -3,5 +3,11 @@ new_dataset/
 new_dataset_only_vfh/
 old_new_dataset/
 raw_datasets/
+new_dataset_only_instance_names/
+new_dataset_only_smoothed_image_features/
+minimal_new_dataset/
 new_dataset.zip
 new_dataset_only_vfh.zip
+new_dataset_only_instance_names.zip
+new_dataset_only_smoothed_image_features.zip
+minimal_new_dataset.zip
