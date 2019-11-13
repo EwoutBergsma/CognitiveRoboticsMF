@@ -2,6 +2,7 @@
 venv/
 
 CPP/build/
+CPP/old_build/
 new_dataset/
 new_dataset_only_vfh/
 old_new_dataset/
