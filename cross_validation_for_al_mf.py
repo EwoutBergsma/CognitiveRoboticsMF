@@ -26,9 +26,10 @@ for training_idxs, validation_idxs in cv_generator:
 
 print("--------")
 print("\nPerforming cross-validation for vfh data with AL using a threshold of {}".format(threshold))
-print("The cross validation took {} seconds".format(time.time() - start_time))
-print("--------\nSamples used: {:.2f} +- {.2f}".format(np.mean(samples_used), np.std(samples_used)))
+function_time = time.time() - start_time
+print("The cross validation took {} minutes and {} seconds".format(function_time // 60, function_time % 60))
+print("--------\nSamples used: {:.2f} +- {:.2f}".format(np.mean(samples_used), np.std(samples_used)))
 print(samples_used)
-print("--------\nAccuracies: {:.2f} +- {.2f}".format(np.mean(scores) * 100, np.std(scores) * 100))
+print("--------\nAccuracies: {:.2f} +- {:.2f}".format(np.mean(scores) * 100, np.std(scores) * 100))
 print(scores)
 print("--------")
