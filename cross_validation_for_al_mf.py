@@ -24,12 +24,14 @@ for training_idxs, validation_idxs in cv_generator:
     scores.append(mf.score(np.array(data[validation_idxs, :]), np.array(labels[validation_idxs])))
     del mf
 
-print("--------")
-print("\nPerforming cross-validation for vfh data with AL using a threshold of {}".format(threshold))
+print("\n--------")
+print("Performing cross-validation for vfh data with AL using a threshold of {}".format(threshold))
 function_time = time.time() - start_time
 print("The cross validation took {} minutes and {} seconds".format(function_time // 60, function_time % 60))
-print("--------\nSamples used: {:.2f} +- {:.2f}".format(np.mean(samples_used), np.std(samples_used)))
-print(samples_used)
-print("--------\nAccuracies: {:.2f} +- {:.2f}".format(np.mean(scores) * 100, np.std(scores) * 100))
-print(scores)
 print("--------")
+print("Samples used: {:.2f} +- {:.2f}".format(np.mean(samples_used), np.std(samples_used)))
+print(samples_used)
+print("--------")
+print("Accuracies: {:.2f} +- {:.2f}".format(np.mean(scores) * 100, np.std(scores) * 100))
+print(scores)
+print("--------\n")
