@@ -19,6 +19,9 @@ elif shape_descriptor == 1:
     data, labels, cv_generator = load_good5_data()
 elif shape_descriptor == 2:
     data, labels, cv_generator = load_good15_data()
+else:
+    print("undefined shape descriptor")
+
 print(data.shape)
 
 scores = []
