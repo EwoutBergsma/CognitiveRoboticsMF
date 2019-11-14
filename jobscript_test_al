@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --time=20:29:59
+#SBATCH --time=03:29:59
 #SBATCH --partition=regular
-#SBATCH --mem=60GB
+#SBATCH --mem=120GB
 #SBATCH --cpus-per-task=1
 
 ml Python/3.6.4-foss-2018a

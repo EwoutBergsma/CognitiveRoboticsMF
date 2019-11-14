@@ -3,16 +3,24 @@ import time
 
 import numpy as np
 
-from load_dataset import load_vfh_data, load_good5_data
+from load_dataset import load_vfh_data, load_good5_data, load_good15_data
 from mondrian_forest_classifier_with_al_strategy import MondrianForestClassifierWithALStrategy
 
 ini_amount_depth_data_thres = 300
 ini_amount_depth_data_perc = 3000
 num_trees_depth_data = 22
 
-data, labels, cv_generator = load_good5_data()
-
 threshold = float(sys.argv[1])
+shape_descriptor = int(sys.argv[2])
+
+if shape_descriptor == 0:
+    data, labels, cv_generator = load_vfh_data()
+elif shape_descriptor == 1:
+    data, labels, cv_generator = load_good5_data()
+elif shape_descriptor == 2:
+    data, labels, cv_generator = load_good15_data()
+print(data.shape)
+
 scores = []
 samples_used = []
 
