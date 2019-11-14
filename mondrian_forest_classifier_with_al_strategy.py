@@ -38,3 +38,22 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
         self.partial_fit(X[selected_idxs], Y[selected_idxs])
 
         return len(selected_idxs)
+
+    def fit_using_al_strategy_thres_intermediate_update(self, X, Y, classes=None, inital_dataset_size=300,
+                                                        threshold=0.5):
+        classes = np.array(range(51)) if classes is None else classes  # default classes are 0-50
+        # first shuffle the dataset and get the initial data
+        X, Y = self.shuffling(X, Y)
+        # Partial fit on the initial data
+        self.partial_fit(X[:inital_dataset_size], Y[:inital_dataset_size], classes)
+
+        amount_of_training_samples_selected = 0
+        # Loop over remaining data samples
+        for data, label in zip(X[inital_dataset_size:], Y[inital_dataset_size:]):
+            # Calculate confidence in the prediction for the data sample
+            if self.calculate_confidence(self.predict_proba([data])[0]) < threshold:
+                # Update the model if we are insecure
+                self.partial_fit([data], [label])
+                amount_of_training_samples_selected += 1
+
+        return amount_of_training_samples_selected
