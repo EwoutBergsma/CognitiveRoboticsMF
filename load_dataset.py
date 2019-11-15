@@ -92,7 +92,7 @@ def load_good15_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=True):
+def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=False):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
@@ -113,7 +113,7 @@ def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=True):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_all_image_feature_data(folder_path=None, use_mRMR=True):
+def load_all_image_feature_data(folder_path=None, use_mRMR=False):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
