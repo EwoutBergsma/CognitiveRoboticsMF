@@ -1,5 +1,7 @@
 keras
 tensorflow
+pymrmr
+pandas
 cycler==0.10.0
 Cython==0.29.14
 decorator==4.4.1
