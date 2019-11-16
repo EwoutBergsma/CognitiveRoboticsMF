@@ -10,7 +10,7 @@ Final project of Cognitive Robotics by:
 # File descriptions
 <ul>
   <li>
-    CPP/include/good.h-- good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor
+    CPP/include/good.h -- good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor
   </li>
   <li>
     CPP/CMakeLists.txt -- Cmake file for building the cpp code
@@ -23,10 +23,10 @@ Final project of Cognitive Robotics by:
   </li>
 
   <li>
-    build_additional_dataset.py
+    build_additional_dataset.py -- additional script for also computing the GOOD5 and GOOD15 descriptions
   </li>
   <li>
-    build_dataset.py
+    build_dataset.py -- the main script for building the dataset, this files reads pngs and scales the to 224*224 and reads in pointclouds to compute VFH descritions.
   </li>
   <li>
     create_image_features.py -- NOT USED IN PAPER
