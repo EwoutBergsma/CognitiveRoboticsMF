@@ -3,7 +3,7 @@ Final project of Cognitive Robotics by:
 <ul>
   <li>Sohyung Kim (S3475743)</li>
   <li>Thijs Eker (S2576597)</li>
-  <li>Dhawal Salvi (S4107624)</liv>
+  <li>Dhawal Salvi (S4107624)</li>
   <li>Ewout Bergsma (S3441423)</li>
 </ul>
 
@@ -87,14 +87,15 @@ Final project of Cognitive Robotics by:
         Install the python packages in requirements.txt
     </li>
     <li>
-        Build the dataset by:<br> 
+        Build the dataset by (this might take a night):<br> 
         1. downloading the files from washington university site 
         <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_eval/">eveluation set</a> and <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_pcd_ascii/">point clouds</a> <br>
         2. Point the EVAL_DATASET_PATH, PC_DATASET_PATH, OUTPUT_DATASET_PATH variables to the downloaded folders<br>
         3. run <code>build_dataset.py</code> and after that <code>build_additional_dataset.py</code>
     </li>
     <li>
-        Run either the <code>cross_validation_for_al_mf.py shape_descriptor confidence_threshold</code>(shape descriptor should be 0(VFH), 1(GOOD5) or 2(GOOD15)) or <code>cross_validation_for_non_al_mf.py</code>
+        Run either the <code>cross_validation_for_al_mf.py shape_descriptor confidence_threshold</code>(shape descriptor
+        should be 0(VFH), 1(GOOD5) or 2(GOOD15)) or <code>cross_validation_for_non_al_mf.py</code> to generate the results
     </li>
 </ul>
 
