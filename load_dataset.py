@@ -1,4 +1,4 @@
-from utils import cats
+from utils import cats, mRMR_selected_image_features, max_relevance_first_split
 from os.path import join
 import numpy as np
 
@@ -50,7 +50,49 @@ def load_vfh_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_vfh_and_all_image_feature_data(folder_path=None):
+def load_good5_data(folder_path=None):
+    """
+    :param folder_path: The path to the folder with .npy files
+    :return: X(data), Y(labels), a 10 fold cross_validation generator
+    """
+    folder_path = folder_path or "./new_dataset"
+    X = ()
+    Y = []
+    all_names = ()
+
+    for label, cat in enumerate(cats):
+        vfh_reps = np.load(join(folder_path, "{}_good5_reps.npy".format(cat)))
+        instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
+
+        X += (vfh_reps,)
+        Y.extend([label] * vfh_reps.shape[0])
+        all_names += (instance_names,)
+
+    return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
+
+
+def load_good15_data(folder_path=None):
+    """
+    :param folder_path: The path to the folder with .npy files
+    :return: X(data), Y(labels), a 10 fold cross_validation generator
+    """
+    folder_path = folder_path or "./new_dataset"
+    X = ()
+    Y = []
+    all_names = ()
+
+    for label, cat in enumerate(cats):
+        vfh_reps = np.load(join(folder_path, "{}_good15_reps.npy".format(cat)))
+        instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
+
+        X += (vfh_reps,)
+        Y.extend([label] * vfh_reps.shape[0])
+        all_names += (instance_names,)
+
+    return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
+
+
+def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=False):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
@@ -61,6 +103,9 @@ def load_vfh_and_all_image_feature_data(folder_path=None):
         image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
         instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
 
+        # When using mRMR choose 512 of the 4096 available image features
+        if use_mRMR:
+            image_features = image_features[:, max_relevance_first_split]
         X += (np.concatenate((vfh_reps, image_features), axis=1),)
         Y.extend([label] * vfh_reps.shape[0])
         all_names += (instance_names,)
@@ -68,7 +113,7 @@ def load_vfh_and_all_image_feature_data(folder_path=None):
     return np.concatenate(X), np.array(Y), custom_washington_dataset_cv_10fold(np.concatenate(all_names))
 
 
-def load_all_image_feature_data(folder_path=None):
+def load_all_image_feature_data(folder_path=None, use_mRMR=False):
     folder_path = folder_path or "./new_dataset"
     X = ()
     Y = []
@@ -78,6 +123,9 @@ def load_all_image_feature_data(folder_path=None):
         image_features = np.load(join(folder_path, "{}_smoothed_image_features.npy".format(cat)))
         instance_names = np.load(join(folder_path, "{}_instance_names.npy".format(cat)))
 
+        # When using mRMR choose 512 of the 4096 available image features
+        if use_mRMR:
+            image_features = image_features[:, max_relevance_first_split]
         X += (image_features,)
         Y.extend([label] * image_features.shape[0])
         all_names += (instance_names,)
