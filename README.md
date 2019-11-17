@@ -32,8 +32,7 @@ Implement this:
     </li>
 </ul>
 
-# File descriptions
-<b>Files used in the final paper:</b>
+# File descriptions of files used in the final paper
 <ul>
   <li>
     <b>CPP/include/good.h</b>: <i>good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor</i>
@@ -77,7 +76,8 @@ Implement this:
     <b>utils.py</b>: <i>file with some definitions(like the category names)</i>
   </li>
 </ul>
-<b>Files not used in the final paper:</b>
+
+# File descriptions of files NOT used in the final paper
 <ul>
   <li>
     <b>create_image_features.py</b>: <i>used to compute 4096 features from the scaled images using VGG</i>
