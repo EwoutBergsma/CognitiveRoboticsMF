@@ -1,4 +1,4 @@
-from utils import cats, mRMR_selected_image_features
+from utils import cats, mRMR_selected_image_features, max_relevance_first_split
 from os.path import join
 import numpy as np
 
@@ -105,7 +105,7 @@ def load_vfh_and_all_image_feature_data(folder_path=None, use_mRMR=False):
 
         # When using mRMR choose 512 of the 4096 available image features
         if use_mRMR:
-            image_features = image_features[:, mRMR_selected_image_features]
+            image_features = image_features[:, max_relevance_first_split]
         X += (np.concatenate((vfh_reps, image_features), axis=1),)
         Y.extend([label] * vfh_reps.shape[0])
         all_names += (instance_names,)
@@ -125,7 +125,7 @@ def load_all_image_feature_data(folder_path=None, use_mRMR=False):
 
         # When using mRMR choose 512 of the 4096 available image features
         if use_mRMR:
-            image_features = image_features[:, mRMR_selected_image_features]
+            image_features = image_features[:, max_relevance_first_split]
         X += (image_features,)
         Y.extend([label] * image_features.shape[0])
         all_names += (instance_names,)

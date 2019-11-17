@@ -4,7 +4,7 @@ from load_dataset import load_all_image_feature_data
 
 data, labels, cv_generator = load_all_image_feature_data()
 
-use_validation = True
+use_validation = False
 n_features = 512
 for training_idxs, validation_idxs in cv_generator:
     split_idx = validation_idxs if use_validation else training_idxs
