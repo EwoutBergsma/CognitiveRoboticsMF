@@ -20,7 +20,7 @@ Implement this:
         Install the python packages in requirements.txt
     </li>
     <li>
-        Build the dataset by (this might take a night, we also have a zip with the data(it's 500mb)):<br> 
+        Build the dataset by (this might take a night, we also have a zip with the data, it's only 500mb):<br> 
         1. download the files from washington university site 
         <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_eval/">evaluation set(containing images)</a> and <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_pcd_ascii/">point clouds</a> <br>
         2. Point the EVAL_DATASET_PATH, PC_DATASET_PATH, OUTPUT_DATASET_PATH variables to the downloaded folders<br>
