@@ -48,6 +48,7 @@ Final project of Cognitive Robotics by:
   </li>
   <li>
     load_dataset.py -- This script contains the functionality for loading the different datasets used in our research (VFH, GOOD5, GOOD15)
+    + the implementation of the cross-validation.
   </li>
   <li>
     mondrian_forest_classifier_with_al_strategy.py -- Implementation of a fit method using the described querying strategy (The AL is implemented here!)
