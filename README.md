@@ -36,7 +36,7 @@ Implement this:
 <b>Files used in the final paper:</b>
 <ul>
   <li>
-    CPP/include/good.h -- good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor
+    CPP/include/good.h: <i> good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor</i>
   </li>
   <li>
     CPP/CMakeLists.txt -- Cmake file for building the cpp code
