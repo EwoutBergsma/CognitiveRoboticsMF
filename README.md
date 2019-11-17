@@ -35,75 +35,75 @@ Implement this:
 # File descriptions of files used in the final paper
 <ul>
   <li>
-    <b>CPP/include/good.h</b>: <i>good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor</i>
+    <b>CPP/include/good.h</b>: good descriptor header file from https://github.com/SeyedHamidreza/GOOD_descriptor
   </li>
   <li>
-    <b>CPP/CMakeLists.txt</b>: <i>Cmake file for building the cpp code</i>
+    <b>CPP/CMakeLists.txt</b>: Cmake file for building the cpp code
   </li>
   <li>
-    <b>CPP/good.cpp</b>: <i>good descriptor implementation from https://github.com/SeyedHamidreza/GOOD_descriptor</i>
+    <b>CPP/good.cpp</b>: good descriptor implementation from https://github.com/SeyedHamidreza/GOOD_descriptor
   </li>
   <li>
-    <b>CPP/main.cpp</b>: <i>the main file called by python for building feature histograms for VFH, GOOD5 and GOOD15</i>
+    <b>CPP/main.cpp</b>: the main file called by python for building feature histograms for VFH, GOOD5 and GOOD15
   </li>
   <br>
   <li>
-    <b>build_additional_dataset.py</b>: <i>additional script for also computing the GOOD5 and GOOD15 descriptions</i>
+    <b>build_additional_dataset.py</b>: additional script for also computing the GOOD5 and GOOD15 descriptions
   </li>
   <li>
-    <b>build_dataset.py</b>: <i>the main script for building the dataset, this files reads pngs and scales the to 224*224 and reads in pointclouds to compute VFH descritions.</i>
+    <b>build_dataset.py</b>: the main script for building the dataset, this files reads pngs and scales the to 224*224 and reads in pointclouds to compute VFH descritions.
   </li>
   <li>
-    <b>cross_validation_for_al_mf.py</b>: <i>The script used for calculating the final Active learning results for the paper</i>
+    <b>cross_validation_for_al_mf.py</b>: The script used for calculating the final Active learning results for the paper
   </li>
   <li>
-    <b>cross_validation_for_non_al_mf.py</b>: <i>This script was used for calculating the final offline learning results in the paper.</i>
+    <b>cross_validation_for_non_al_mf.py</b>: This script was used for calculating the final offline learning results in the paper.
   </li>
   <li>
-    <b>load_dataset.py</b>: <i>This script contains the functionality for loading the different datasets used in our research (VFH, GOOD5, GOOD15)
-    + the implementation of the cross-validation.</i>
+    <b>load_dataset.py</b>: This script contains the functionality for loading the different datasets used in our research (VFH, GOOD5, GOOD15)
+    + the implementation of the cross-validation.
   </li>
   <li>
-    <b>mondrian_forest_classifier_with_al_strategy.py</b>: <i>Implementation of a fit method using the described querying strategy (The AL is implemented here!)</i>
+    <b>mondrian_forest_classifier_with_al_strategy.py</b>: Implementation of a fit method using the described querying strategy (The AL is implemented here!)
   </li>
   <li>
-    <b>requirements.txt</b>: <i>The required pip packages for running the code</i>
+    <b>requirements.txt</b>: The required pip packages for running the code
   </li>
   <li>
-    <b>run_exec.py</b>: <i>python file calling the compiled C++ code from the CPP/ folder</i>
+    <b>run_exec.py</b>: python file calling the compiled C++ code from the CPP/ folder
   </li>
   <li>
-    <b>utils.py</b>: <i>file with some definitions(like the category names)</i>
+    <b>utils.py</b>: file with some definitions(like the category names)
   </li>
 </ul>
 
 # File descriptions of files NOT used in the final paper
 <ul>
   <li>
-    <b>create_image_features.py</b>: <i>used to compute 4096 features from the scaled images using VGG</i>
+    <b>create_image_features.py</b>: used to compute 4096 features from the scaled images using VGG
   </li>
   <li>
-    <b>final_general_functions.py</b>: <i>these script were used for RGB results</i>
+    <b>final_general_functions.py</b>: these script were used for RGB results
   </li>
   <li>
-    <b>final_mf_all_image_features.py</b>: <i>these script were used for RGB results</i>
+    <b>final_mf_all_image_features.py</b>: these script were used for RGB results
   </li>
   <li>
-    <b>final_mf_vfh_and_all_image_features.py</b>: <i>these script were used for RGB results</i>
+    <b>final_mf_vfh_and_all_image_features.py</b>: these script were used for RGB results
   </li>
   <li>
-    <b>mrmr_feature_selection.py</b>: <i>mrmr feature selection using skfeature-chappers package</i>
+    <b>mrmr_feature_selection.py</b>: mrmr feature selection using skfeature-chappers package
   </li>
   <li>
-    <b>mrmr_feature_selection_2.py</b>: <i>pymrmr feature selection</i>
+    <b>mrmr_feature_selection_2.py</b>: pymrmr feature selection
   </li>
   <li>
-    <b>mrmr_feature_selection_3.py</b>: <i>multithreaded mrmr feature selection using mifs package</i>
+    <b>mrmr_feature_selection_3.py</b>: multithreaded mrmr feature selection using mifs package
   </li>
   <li>
-    <b>rf_hyperparam_search.py</b>: <i>hyperparameter search for random forest</i>
+    <b>rf_hyperparam_search.py</b>: hyperparameter search for random forest
   </li>
   <li>
-    <b>train_svm.py</b>: <i>file for testing SVM on VFH data</i>
+    <b>train_svm.py</b>: file for testing SVM on VFH data
   </li>
 </ul>
