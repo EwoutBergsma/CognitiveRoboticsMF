@@ -21,8 +21,8 @@ Implement this:
     </li>
     <li>
         Build the dataset by (this might take a night):<br> 
-        1. downloading the files from washington university site 
-        <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_eval/">eveluation set</a> and <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_pcd_ascii/">point clouds</a> <br>
+        1. download the files from washington university site 
+        <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_eval/">evaluation set(containing images)</a> and <a href="https://rgbd-dataset.cs.washington.edu/dataset/rgbd-dataset_pcd_ascii/">point clouds</a> <br>
         2. Point the EVAL_DATASET_PATH, PC_DATASET_PATH, OUTPUT_DATASET_PATH variables to the downloaded folders<br>
         3. run <code>build_dataset.py</code> and after that <code>build_additional_dataset.py</code>
     </li>
@@ -47,7 +47,7 @@ Implement this:
   <li>
     CPP/main.cpp -- the main file called by python for building feature histograms for VFH, GOOD5 and GOOD15
   </li>
-
+  <br>
   <li>
     build_additional_dataset.py -- additional script for also computing the GOOD5 and GOOD15 descriptions
   </li>
