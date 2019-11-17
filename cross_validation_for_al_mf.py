@@ -30,8 +30,8 @@ samples_used = []
 start_time = time.time()
 for training_idxs, validation_idxs in cv_generator:
     mf = MondrianForestClassifierWithALStrategy(n_estimators=22)
-    samples_used.append(mf.fit_using_al_strategy_thres(data[training_idxs], labels[training_idxs], np.array(range(51)),
-                                                       300, threshold))
+    samples_used.append(mf.fit_using_al_strategy_thres_intermediate_update(data[training_idxs], labels[training_idxs],
+                                                                           np.array(range(51)), 300, threshold))
     scores.append(mf.score(np.array(data[validation_idxs, :]), np.array(labels[validation_idxs])))
     del mf
 

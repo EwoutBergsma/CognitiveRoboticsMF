@@ -3,8 +3,6 @@ from os import listdir
 from os.path import isfile, join, isdir
 
 import numpy as np
-from imageio import imread
-from skimage.transform import resize
 
 from run_exec import get_vhf_representation, get_good5_representation, get_good15_representation
 from utils import cats

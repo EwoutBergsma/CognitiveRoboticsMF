@@ -23,6 +23,16 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
         return X_train[rand_selected_rows, :], y_train[rand_selected_rows], rand_selected_rows
 
     def fit_using_al_strategy_thres(self, X, Y, classes=None, inital_dataset_size=300, threshold=0.5):
+        """
+        This method trains on the initial data and then selects the rest of the training samples based on the
+        threshold and than learns on all selected samples
+        :param X: Data samples
+        :param Y: Data labels
+        :param classes: all classes
+        :param inital_dataset_size: the size of the initial training set
+        :param threshold: the confidence threshold
+        :return:
+        """
         classes = np.array(range(51)) if classes is None else classes  # default classes are 0-50
         # first shuffle the dataset and get the initial data
         X, Y = self.shuffling(X, Y)
@@ -41,6 +51,16 @@ class MondrianForestClassifierWithALStrategy(MondrianForestClassifier):
 
     def fit_using_al_strategy_thres_intermediate_update(self, X, Y, classes=None, inital_dataset_size=300,
                                                         threshold=0.5):
+        """
+        This method trains on the initial data and goes through the remaining data learning from the samples or not
+        according to the confidence threshold
+        :param X: Data samples
+        :param Y: Data labels
+        :param classes: all classes
+        :param inital_dataset_size: the size of the initial training set
+        :param threshold: the confidence threshold
+        :return:
+        """
         classes = np.array(range(51)) if classes is None else classes  # default classes are 0-50
         # first shuffle the dataset and get the initial data
         X, Y = self.shuffling(X, Y)
